@@ -1,0 +1,30 @@
+<div id="MainContainer">
+    <div id="ImgContainer">
+        <div id="Details">
+            <div id="Temp">18˚</div>
+            <div id="LocationDate">
+                <span id="Location">Sydney</span>
+                <span id="Date">7:43 AM - Monday, 6 Feb 2023</span>
+            </div>
+        </div>
+        <img src="../../assets/Img/Sydney.jpg">
+    </div>
+    <div id="FormContainer">
+        <div id="Logo">
+            <img src="../../assets/Img/LogoPink.png" width="200">
+        </div>
+        <div id="Welcome">
+            <h1>Welcome back</h1>
+            <h5>Please enter your details</h5>
+        </div>
+        <div id="Form">
+            <label for="Email">Email</label>
+            <input type="email" id="Email" name="Email" placeholder="Enter your email"><br><br>
+            <label for="Email">Password</label>
+            <input type="password" id="Password" name="Password" placeholder="Enter your password"><br><br>
+            <button mat-flat-button (click)="userService.login()" color="primary" id="SubmitBtn">Sign in</button>
+            <div id="SignUp">Dont have an account ? <a>&nbsp;Sign up</a></div>
+        </div>
+    </div>
+    
+</div>

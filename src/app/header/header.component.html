@@ -1,0 +1,32 @@
+<div id="MainContainer">
+    <div id="Tag">
+        Settings
+    </div>
+    <div id="Search">
+        <span class="material-symbols-outlined icon">search</span>
+        <input type="text" placeholder="Search city">
+    </div>
+    <span id="Notification" [matMenuTriggerFor]="NotificationsMenu" [matBadge]="userService.userLogged ? 15:17" matBadgeColor="accent" class="material-symbols-outlined">notifications</span>
+    <div id="Avatar" *ngIf="userService.userLogged" [matMenuTriggerFor]="AvatarMenu">
+        <div id="AvatarImg">LY</div>
+        <span>Layouni Yassine</span>
+    </div>
+    <button [routerLink]="['/Login']" id="SignInBtn" *ngIf="!userService.userLogged" mat-stroked-button color="primary">Sign in</button>
+</div>
+
+
+
+<mat-menu #NotificationsMenu="matMenu">
+    <div id="NotificationsOff">
+        <span class="material-symbols-outlined">notifications_off</span>
+        <span style="margin-top: 5%;">Login to your account <br>to recieve notifications</span>
+    </div>
+</mat-menu>
+
+
+<mat-menu #AvatarMenu="matMenu">
+    <button (click)="userService.logout()" mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+</mat-menu>
