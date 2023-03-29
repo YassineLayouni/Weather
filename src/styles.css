@@ -1,9 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~maplibre-gl/dist/maplibre-gl.css';
+
+@font-face {
+    font-family: Inter;
+    src: url(assets/fonts/Inter.ttf);
+  }
 
 html, body { height: 100%; margin: 0; padding: 0; overflow: hidden;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;}
+*{
+  font-family: Inter;
+}
+
+
 
 :root{
     --1Color : rgb(67,80,175);
-    --2Color : rgb(206, 213, 255);
+    --2Color : rgb(235, 81, 129);
+}
+
+.errorSnackbar {
+  background: white;
+  border-top: 5px solid var(--2Color);
+  color: black;
+}
+
+.successSnackbar {
+  background: white;
+  border-top: 5px solid var(--1Color);
+  color: black;
 }

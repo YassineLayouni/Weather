@@ -1,8 +1,8 @@
 #MainContainer{
     margin-left: 17vw;
-    margin-top: 10vh;
+    margin-top: 8vh;
     width: 83vw;
-    height: 90vh;
+    height: 92vh;
 }
 
 #Profile, #Application{
@@ -58,4 +58,14 @@ input{
 
 #SaveBtn{
     margin-left: 3%;
+}
+
+.required{
+    color : red;
+    vertical-align: top;
+}
+
+.inputError{
+    color: red;
+    font-size: 11px;
 }

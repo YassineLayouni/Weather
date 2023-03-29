@@ -1,23 +1,46 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators'; 
+import { City } from './Classes/City';
+import { User } from './Classes/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(public router:Router) { }
+  constructor(public router:Router, private http : HttpClient) {
+    if(localStorage.getItem('user') != null){
+      this.user = JSON.parse(localStorage.getItem('user')!);
+      this.isUserLogged = true;
+    }else{
+      this.isUserLogged = false;
+      this.user = undefined;
+    }
+   }
 
-  userLogged = false;
+  isUserLogged = false;
+  user : User | undefined = undefined;
   showMenu = false;
 
-  logout(){
-    this.userLogged = false;
+  _logout(){
+    this.isUserLogged = false;
+    localStorage.removeItem('user');
+    this.user = undefined;
     this.router.navigate(['Login']);
   }
 
-  login(){
-    this.userLogged = true;
-    this.router.navigate(['Home']);
+  _login(user : User) : Observable<User>{
+    return this.http.post<User>(`http://localhost:5002/login`,user)
+  }
+
+  _signUp(user : User) : Observable<any>{
+    return this.http.post<User>(`http://localhost:5002/users/add`,user)
+  }
+
+  _update(user : User) : Observable<any>{
+    return this.http.put<User>(`http://localhost:5002/user/update`,user)
   }
 }

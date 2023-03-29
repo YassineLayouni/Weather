@@ -1,6 +1,6 @@
 <div id="MainContainer">
     <div id="Logo">
-        <img src="../../assets/Img/LogoWhite.png" width="90%">
+        <img src="../../assets/Img/LogoWhite.png" width="75%">
     </div>
     <div id="MenuList">
         <div [routerLink]="['/Home']" routerLinkActive="active" matRipple  id="Home">
@@ -15,7 +15,7 @@
             <span class="material-symbols-outlined icon">map</span>
             Map
         </div>
-        <div [routerLink]="['/Settings']" routerLinkActive="active" matRipple id="Settings">
+        <div *ngIf="this.userService.isUserLogged" [routerLink]="['/Settings']" routerLinkActive="active" matRipple id="Settings">
             <span class="material-symbols-outlined icon">settings</span>
             Settings
         </div>

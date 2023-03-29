@@ -2,15 +2,10 @@
     position: absolute;
     width : 83vw;
     margin-left: 17vw;
-    height: 10vh;
+    height: 8vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-#Tag{
-    margin-left: 3vw;
-    font-size: 25px;
 }
 
 #Avatar{
@@ -18,22 +13,30 @@
 }
 
 #Search{
+    margin-left: 3%;
     display: flex;
     align-items: center;
-    border : 1px solid rgb(222, 222, 222);
-    border-radius: 10px;
-    padding: 0.5vh;
-    width: 40vw;
-    height: 4vh;
-    background-color: rgb(247, 247, 247);
+    border-radius: 5px;
+    padding: 0.5%;
+    width: 70%;
+    height: 45%;
+    background-color: rgb(245, 245, 245);
+    transition: all 0.3s ease-in-out;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
 }
+
+#Search span{
+    margin-left: 2%;
+}
+
 
 input{
     border: 0px;
-    margin-left: 1vw;
-    width: 90%;
+    margin-left: 2%;
+    width: 95%;
     outline: none;
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(245, 245, 245);
 }
 
 input:focus{
@@ -41,7 +44,7 @@ input:focus{
 }
 
 .icon{
-    color: grey;
+    color: var(--1Color);
     margin-left: 0.5vw;
 }
 
@@ -65,7 +68,7 @@ input:focus{
 }
 
 #SignInBtn{
-    margin-right: 5%;
+    margin-right: 3%;
     width: 10%;
 }
 

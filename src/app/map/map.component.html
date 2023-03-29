@@ -1,2 +1,61 @@
+<!--<div id="MainContainer">
+    <mgl-map #map
+    [style]="'https://api.maptiler.com/maps/streets/style.json?key=TQUed2PX6IF7nMlESPX8'"
+    [zoom]="[14]"
+    [center]="[2.1734035, 41.3850639]">
+  
+  <mgl-marker  #myMarker class="marker" [lngLat]="[2.1734035, 41.3850639]"></mgl-marker>
+  <mgl-popup  #popup  [closeButton]="false" [closeOnClick]="false" [marker]="myMarker">
+    <div class="cityName"> Barcelona</div>
+    <div class="cityDetails">
+        <div class="cityDetail">
+            <span class="detail">Country</span>
+            <span class="detailValue">Spain</span>
+        </div>
+        <div class="cityDetail">
+            <span class="detail">Temp</span>
+            <span class="detailValue">13˚C</span>
+        </div>
+        <div class="cityDetail">
+            <span class="detail">Clouds</span>
+            <span class="detailValue">100%</span>
+        </div>
+        <div class="cityDetail">
+            <span class="detail">Humidity</span>
+            <span class="detailValue">66%</span>
+        </div>
+        <div class="cityDetail">
+            <span class="detail">Pressure</span>
+            <span class="detailValue">1020hPa</span>
+        </div> 
+        <div class="cityDetail">
+            <span class="detail">Wind Direction</span>
+            <span class="detailValue">88˚</span>
+        </div> 
+        <div class="cityDetail">
+            <span class="detail">Wind Speed</span>
+            <span class="detailValue">7.1 m/s</span>
+        </div>
+        <button mat-raised-button color="accent" id="AddCity">Add City</button>
+    </div>  
+  </mgl-popup>
+
+  <mgl-marker *ngFor="let city of cityService.followedCities"  #myMarker class="marker" [lngLat]="[city.lon!,city.lat!]"></mgl-marker>
+
+
+
+  <mgl-control mglNavigation position="top-left"></mgl-control>
+  <mgl-control mglFullscreen position="top-right"></mgl-control>
+  <mgl-control mglGeolocate position="top-right"></mgl-control>
+  </mgl-map>
+</div>-->
+
+
+
 <div id="MainContainer">
+    <div class="map-wrap">
+        <a href="https://www.maptiler.com" class="watermark"><img
+            src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"/></a>
+        <div class="map" #map></div>
+    </div>
 </div>

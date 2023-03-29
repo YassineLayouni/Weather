@@ -19,6 +19,12 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ForecastComponent } from './forecast/forecast.component';
 import { MapComponent } from './map/map.component';
 import { CitiesComponent } from './cities/cities.component';
+import { NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
+import { HttpClientModule } from '@angular/common/http';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {FormsModule} from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 @NgModule({
@@ -43,7 +49,12 @@ import { CitiesComponent } from './cities/cities.component';
     MatButtonModule,
     MatBadgeModule,
     MatMenuModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgxMapLibreGLModule,
+    HttpClientModule,
+    MatAutocompleteModule,
+    FormsModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

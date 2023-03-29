@@ -38,6 +38,7 @@
 }
 #Location{
     font-size: 40px;
+    margin-bottom: 5px;
 }
 #Date{
     margin-top: 2vh;
@@ -117,5 +118,27 @@ input{
     justify-content: center;
     flex-direction: column;
     width: 48%;
+}
+
+#SignIn a{
+    color : var(--2Color); 
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.inputError{
+    color: red;
+    font-size: 11px;
+}
+
+.required{
+    color : red;
+    vertical-align: top;
+}
+
+#Continue{
+    color: var(--1Color);
+    text-decoration: underline;
+    cursor: pointer;
 }
 

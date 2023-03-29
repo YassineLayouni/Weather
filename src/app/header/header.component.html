@@ -1,17 +1,14 @@
 <div id="MainContainer">
-    <div id="Tag">
-        Settings
-    </div>
     <div id="Search">
         <span class="material-symbols-outlined icon">search</span>
-        <input type="text" placeholder="Search city">
+        <input (keyup)="autocompleteCities($event)" type="text" placeholder="Search City" [matAutocomplete]="autocomplete">
     </div>
-    <span id="Notification" [matMenuTriggerFor]="NotificationsMenu" [matBadge]="userService.userLogged ? 15:17" matBadgeColor="accent" class="material-symbols-outlined">notifications</span>
-    <div id="Avatar" *ngIf="userService.userLogged" [matMenuTriggerFor]="AvatarMenu">
-        <div id="AvatarImg">LY</div>
-        <span>Layouni Yassine</span>
+    <span id="Notification" [matMenuTriggerFor]="NotificationsMenu" [matBadge]="userService.isUserLogged ? 15:0" matBadgeColor="accent" matBadgeSize="small" class="material-symbols-outlined">notifications</span>
+    <div id="Avatar" *ngIf="userService.isUserLogged" [matMenuTriggerFor]="AvatarMenu">
+        <div id="AvatarImg">{{this.userService.user?.nom?.toUpperCase()?.at(0)}}{{this.userService.user?.prenom?.toUpperCase()?.at(0)}}</div>
+        <span>{{this.userService.user?.nom}} {{this.userService.user?.prenom}}</span>
     </div>
-    <button [routerLink]="['/Login']" id="SignInBtn" *ngIf="!userService.userLogged" mat-stroked-button color="primary">Sign in</button>
+    <button [routerLink]="['/Login']" id="SignInBtn" *ngIf="!userService.isUserLogged" mat-stroked-button color="primary">Sign in</button>
 </div>
 
 
@@ -25,8 +22,17 @@
 
 
 <mat-menu #AvatarMenu="matMenu">
-    <button (click)="userService.logout()" mat-menu-item>
+    <button (click)="userService._logout()" mat-menu-item>
       <mat-icon>logout</mat-icon>
       <span>Logout</span>
     </button>
 </mat-menu>
+
+
+<mat-autocomplete #autocomplete="matAutocomplete">
+  <mat-option *ngFor="let city of cities" [value]="city.name" (onSelectionChange)="citySelected(city)">
+    <!--<img alt="" class="example-option-img" [src]="state.flag" height="25">-->
+    <span>{{city.country}}</span> |
+    <small>{{city.name}}</small>
+  </mat-option>
+</mat-autocomplete>
