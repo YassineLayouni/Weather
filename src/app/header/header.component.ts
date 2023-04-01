@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
             lon : d.lon
           }));
         }
-        console.log(this.cities);
       }
     );    
     }else{
@@ -41,7 +40,6 @@ export class HeaderComponent implements OnInit {
   citySelected(city : City){
     this.cityService.followedCitiesSubject.next(city);
     this.router.navigate(['Map']);
-    console.log(city);
   }
   ngOnInit(): void {
   }

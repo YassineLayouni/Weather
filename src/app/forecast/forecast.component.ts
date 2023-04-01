@@ -8,6 +8,8 @@ import { UserService } from '../user.service';
 })
 export class ForecastComponent implements OnInit {
 
+  
+
   constructor(public userService:UserService) { 
     this.userService.showMenu = true;
   }

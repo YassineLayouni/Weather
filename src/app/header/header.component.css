@@ -1,7 +1,7 @@
 #MainContainer{
     position: absolute;
-    width : 83vw;
-    margin-left: 17vw;
+    width : 85vw;
+    margin-left: 15vw;
     height: 8vh;
     display: flex;
     justify-content: space-between;

@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {FormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -38,7 +39,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HomeComponent,
     ForecastComponent,
     MapComponent,
-    CitiesComponent
+    CitiesComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -55,6 +57,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatAutocompleteModule,
     FormsModule,
     MatSnackBarModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

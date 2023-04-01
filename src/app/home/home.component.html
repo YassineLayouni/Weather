@@ -1,1 +1,155 @@
-<p>home works!</p>
+<div id="MainContainer">
+    <div id="CurrentWeather" class="Container">
+        <div class="Subtitle">Current Location</div>
+        <div class="Title">Spain - Barcelona</div>
+        <div class="Row" style="margin-top: 2%; height: 80%;">
+            <div id="City">
+                <div class="Row">
+                    <img src="../../assets/Img/SunnyIcon.svg" style="transform: scale(1.5);">
+                    <div style="font-weight: 500; color: white;font-size: 60px;">16º</div>
+                </div>
+            </div>
+            <div id="AddCity">
+                <span class="material-symbols-outlined icon">add</span>
+                <span>Add City</span>
+            </div>
+        </div>
+    </div>
+    <div id="ChanceOfRain" class="Container">
+        <div class= "Title" style="margin-bottom: 2vh;"> Chance Of Rain</div>
+
+        <ngx-charts-bar-horizontal 
+    [view]="[300,300]"
+    [results]="chanceOfRain"
+    [xAxisLabel]="'Percentage'"
+    [legendTitle]="''"
+    [yAxisLabel]="'Time'"
+    [showXAxisLabel]="false"
+    [showYAxisLabel]="false"
+    [xAxis]="true"
+    [yAxis]="true"
+    [gradient]="true"
+    [showGridLines]="false"
+    [customColors]="customColors"
+    >
+        </ngx-charts-bar-horizontal>
+
+
+    </div>
+    <div id="Today" class="Container">
+        <div class="Title">Today's Highlights</div>
+        <div class="Row" style="justify-content: space-between;margin-top: 2%;">
+            <div class="HighlightContainer">
+                <div class="Subtitle">
+                    Precipation
+                </div>
+                <div align="center" style="margin-top: 20%;">5%</div>
+            </div>
+            <div class="HighlightContainer">
+                <div class="Subtitle">
+                    Humidity
+                </div>
+                <div align="center" style="margin-top: 20%;">85%</div>
+            </div>
+            <div class="HighlightContainer">
+                <div class="Subtitle">
+                    Wind 
+                </div>
+                <div align="center" style="margin-top: 20%;">2 Km/h</div>
+            </div>
+            <div class="HighlightContainer">
+                <div class="Subtitle">
+                    Pressure
+                </div>
+                <div align="center" style="margin-top: 20%;">22%</div>
+            </div>
+            <div class="HighlightContainer">
+                <div class="Subtitle">
+                    Clouds
+                </div>
+                <div align="center" style="margin-top: 20%;">5 Km/h</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 5vh ;">
+     
+        <ngx-charts-line-chart 
+        [view]="[800,130]"
+        [results]="TempData"
+        [xAxisLabel]="'Percentage'"
+        [legendTitle]="''"
+        [yAxisLabel]="'Time'"
+        [showXAxisLabel]="false"
+        [showYAxisLabel]="false"
+        [xAxis]="true"
+        [yAxis]="true"
+        [gradient]="true"
+        [showGridLines]="false"
+        [customColors]="customColors"
+        >
+        </ngx-charts-line-chart>
+    </div>
+    </div>
+
+
+    <div id="MinMax" class = "Container">
+        <div class="Title">3 Day Forecast</div>
+
+
+        <div class="Row">
+            <div class="Row" id="MinMaxRow"> 
+                <span class="material-symbols-outlined icon" style="font-size: 20px; color: black;">arrow_upward</span>
+                <span>26º</span>
+                <span class="material-symbols-outlined icon" style="font-size: 20px; color: black;">arrow_downward</span>
+                <span>11º</span>
+            </div>
+            <div class="Row" id="MinMaxDay"> 
+                <img src="../../assets/Img/RainyIcon.svg" width="30%">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="Title" style="font-size: 12px; color: black;"> Tuesday </div>
+                    <div class="Subtitle" style="font-size: 12px;">Cloudy</div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="Row">
+            <div class="Row" id="MinMaxDay"> 
+                <img src="../../assets/Img/SunnyIcon.svg" width="30%">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="Title" style="font-size: 12px; color: black;"> Wednesday </div>
+                    <div class="Subtitle" style="font-size: 12px;">Sunny</div>
+                </div>
+            </div>
+            <div class="Row" id="MinMaxRow"> 
+                <span class="material-symbols-outlined icon" style="font-size: 20px; color: black;">arrow_upward</span>
+                <span>15º</span>
+                <span class="material-symbols-outlined icon" style="font-size: 20px; color: black;">arrow_downward</span>
+                <span>3º</span>
+            </div>
+        </div>
+
+
+
+
+        <div class="Row">
+            <div class="Row" id="MinMaxRow"> 
+                <span class="material-symbols-outlined icon" style="font-size: 20px; color: black;">arrow_upward</span>
+                <span>30º</span>
+                <span class="material-symbols-outlined icon" style="font-size: 20px; color: black;">arrow_downward</span>
+                <span>18º</span>
+            </div>
+            <div class="Row" id="MinMaxDay"> 
+                <img src="../../assets/Img/HeavyRainIcon.svg" width="30%">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="Title" style="font-size: 12px; color: black;"> Thursday </div>
+                    <div class="Subtitle" style="font-size: 12px;">Heavy Rain</div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

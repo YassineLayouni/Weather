@@ -30,3 +30,33 @@ body { margin: 0;}
   border-top: 5px solid var(--1Color);
   color: black;
 }
+
+.row{
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.container{
+  padding: 2vw;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.title{
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.subtitle{
+  font-size: smaller;
+  color: grey;
+}
