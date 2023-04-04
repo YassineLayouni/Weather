@@ -20,7 +20,9 @@ export class City{
         humidity,
         pressure,
         windDirection,
-        windSpeed}:{name? : string, 
+        windSpeed}:{
+        
+        name? : string, 
         country? : string,
         lat? : number,
         lon? : number,

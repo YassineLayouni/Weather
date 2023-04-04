@@ -5,40 +5,9 @@
     [center]="[2.1734035, 41.3850639]">
   
   <mgl-marker  #myMarker class="marker" [lngLat]="[2.1734035, 41.3850639]"></mgl-marker>
-  <mgl-popup  #popup  [closeButton]="false" [closeOnClick]="false" [marker]="myMarker">
-    <div class="cityName"> Barcelona</div>
-    <div class="cityDetails">
-        <div class="cityDetail">
-            <span class="detail">Country</span>
-            <span class="detailValue">Spain</span>
-        </div>
-        <div class="cityDetail">
-            <span class="detail">Temp</span>
-            <span class="detailValue">13˚C</span>
-        </div>
-        <div class="cityDetail">
-            <span class="detail">Clouds</span>
-            <span class="detailValue">100%</span>
-        </div>
-        <div class="cityDetail">
-            <span class="detail">Humidity</span>
-            <span class="detailValue">66%</span>
-        </div>
-        <div class="cityDetail">
-            <span class="detail">Pressure</span>
-            <span class="detailValue">1020hPa</span>
-        </div> 
-        <div class="cityDetail">
-            <span class="detail">Wind Direction</span>
-            <span class="detailValue">88˚</span>
-        </div> 
-        <div class="cityDetail">
-            <span class="detail">Wind Speed</span>
-            <span class="detailValue">7.1 m/s</span>
-        </div>
-        <button mat-raised-button color="accent" id="AddCity">Add City</button>
-    </div>  
-  </mgl-popup>
+  <mgl-popup  #popup  [closeButton]="false" [closeOnClick]="false" [marker]="myMarker">-->
+   
+  <!--</mgl-popup>
 
   <mgl-marker *ngFor="let city of cityService.followedCities"  #myMarker class="marker" [lngLat]="[city.lon!,city.lat!]"></mgl-marker>
 
@@ -57,5 +26,47 @@
         <a href="https://www.maptiler.com" class="watermark"><img
             src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"/></a>
         <div class="map" #map></div>
+    </div>
+
+
+
+    <div  #cityDetails>
+        <div *ngIf="loading">
+            <mat-spinner [diameter]="30"></mat-spinner>
+        </div>
+        <div *ngIf="loading == false && selectedCity" style="width: 15vw;">
+                <div class="cityName"> {{selectedCity.name}}</div>
+            <div class="cityDetails">
+                <div class="cityDetail">
+                    <span class="detail">Country</span>
+                    <span class="detailValue">{{selectedCity.country}}</span>
+                </div>
+                <div class="cityDetail">
+                    <span class="detail">Temp</span>
+                    <span class="detailValue">{{selectedCity.temp}}˚C</span>
+                </div>
+                <!--<div class="cityDetail">
+                    <span class="detail">Clouds</span>
+                    <span class="detailValue">{{selectedCity.clouds}}%</span>
+                </div>-->
+                <div class="cityDetail">
+                    <span class="detail">Humidity</span>
+                    <span class="detailValue">{{selectedCity.humidity}}%</span>
+                </div>
+                <div class="cityDetail">
+                    <span class="detail">Pressure</span>
+                    <span class="detailValue">{{selectedCity.pressure}}hPa</span>
+                </div> 
+                <div class="cityDetail">
+                    <span class="detail">Wind Direction</span>
+                    <span class="detailValue">{{selectedCity.windDirection}}˚</span>
+                </div> 
+                <div class="cityDetail">
+                    <span class="detail">Wind Speed</span>
+                    <span class="detailValue">{{selectedCity.windSpeed}}m/s</span>
+                </div>
+                <button mat-raised-button color="accent" id="AddCity">Add City</button>
+            </div>  
+        </div>
     </div>
 </div>

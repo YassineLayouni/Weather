@@ -53,6 +53,12 @@ mgl-map {
     margin-top: 5%;
 }
 
+#City{
+    width: 1vw !important; 
+    height: 1vh !important;
+    background-color: blue;
+}
+
 
 
 

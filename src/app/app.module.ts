@@ -25,6 +25,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {FormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -58,6 +59,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     FormsModule,
     MatSnackBarModule,
     NgxChartsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
