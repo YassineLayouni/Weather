@@ -4,9 +4,9 @@
 <div id="MainContainer" *ngIf="cityService.selectedCityForecast && cityService.selectedCity">
 
     <div id="CurrentWeather" class="Container row" style="justify-content: space-between;">
-        <div *ngFor="let item of cityService.forecastDays" class="container column day" [ngClass]="item.date.getDate() == cityService.selectedDate.getDate() ? 'daySelected' : ''" (click)="cityService.selectedDate.setDate(item.date.getDate()); this.cityService.refreshForecast()">
-            <div>{{cityService.days[item.date.getDay() - 1]}}</div>
-            <img src="../../assets/Img/SunnyIcon.svg" width="100%">
+        <div *ngFor="let item of cityService.forecastDays" class="container column day" [ngClass]="item.date.getDate() == cityService.selectedDate.getDate() ? 'daySelected' : ''" (click)="cityService.selectedDate.setDate(item.date.getDate()); cityService.refreshForecast(); cityService.cityWeatherIcon(item.date.getDate())">
+            <div>{{cityService.days[item.date.getDay()]}}</div>
+            <img [src]="cityService.cityWeatherIcon(item.date.getDate())" width="100%">
             <div class="row" style="align-items: space-between;">
                 <span class="material-symbols-outlined icon" style="font-size: 20px; color: black;">arrow_upward</span>
                 &nbsp;<span>{{item.maxTemp}}º</span>
@@ -41,7 +41,7 @@
     </div>
 
     <div id="Today" class="Container">
-        <div class="Title">Highlights</div>
+        <div class="Title">Highlights of the day</div>
 
         <div class="row" style="margin-top: 5vh;">
 

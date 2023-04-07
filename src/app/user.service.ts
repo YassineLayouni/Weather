@@ -40,6 +40,23 @@ export class UserService {
     return this.http.post<User>(`http://localhost:5002/users/add`,user)
   }
 
+  _getUser(user : User) : Observable<any>{
+    return this.http.get<User>(`http://localhost:5002/user/${user._id["$oid"]}`)
+  }
+
+  _refreshUser(){
+    if(this.user){
+      console.log(this.user);
+      this._getUser(this.user).subscribe((data:User)=>{
+        this.user = data;
+        localStorage.removeItem('user');
+        localStorage.setItem('user',JSON.stringify(this.user));
+
+        console.log(this.user);
+      })
+    }
+  }
+
   _update(user : User) : Observable<any>{
     return this.http.put<User>(`http://localhost:5002/user/update`,user)
   }

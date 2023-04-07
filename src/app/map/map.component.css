@@ -81,3 +81,29 @@ mgl-map {
     bottom: 10px;
     z-index: 999;
   }
+  
+.myFollowedMarker{
+    padding: 0.5vw;
+    background-color: var(--1Color);
+    color : white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 8vw;
+    height: 2vh;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space: nowrap;
+  }
+
+.mySearchedMarker{
+    padding: 0.5vw;
+    background-color: var(--2Color);
+    color : white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 8vw;
+    height: 2vh;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space: nowrap;
+  }

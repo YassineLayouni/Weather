@@ -6,13 +6,13 @@
         <div class="Subtitle">Location</div>
         <div class="Title">{{cityService.selectedCity.name}} - {{cityService.selectedCity.country}}</div>
         <div class="Row" style="margin-top: 2%; height: 80%;">
-            <div id="City">
+            <div id="City" [ngStyle]="{'background-image':'linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url('+cityService.selectedCity.image+')'}">
                 <div class="Row">
-                    <img src="../../assets/Img/SunnyIcon.svg" style="transform: scale(1.5);">
+                    <img [src]="cityService.cityWeatherIcon(cityService.forecastDays[0]['date'].getDate())" style="transform: scale(1.5);">
                     <div style="font-weight: 500; color: white;font-size: 60px;">{{cityService.selectedCity.temp}}º</div>
                 </div>
             </div>
-            <div id="AddCity">
+            <div id="AddCity" [routerLink]="['/Map']">
                 <span class="material-symbols-outlined icon">add</span>
                 <span>Add City</span>
             </div>
@@ -101,10 +101,10 @@
                 <span>{{cityService.forecastDays[1]["minTemp"]}}º</span>
             </div>
             <div class="Row" id="MinMaxDay"> 
-                <img src="../../assets/Img/RainyIcon.svg" width="30%">
+                <img [src]="cityService.cityWeatherIcon(cityService.forecastDays[1]['date'].getDate())" width="30%">
                 <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="Title" style="font-size: 12px; color: black;"> {{cityService.days[cityService.forecastDays[1]["date"].getDay() - 1]}} </div>
-                    <div class="Subtitle" style="font-size: 12px;">Cloudy</div>
+                    <div class="Title" style="font-size: 12px; color: black;"> {{cityService.days[cityService.forecastDays[1]["date"].getDay()]}} </div>
+                    <div class="Subtitle" style="font-size: 12px;">{{cityService.cityWeatherStatus(cityService.forecastDays[1]['date'].getDate())}}</div>
                 </div>
             </div>
         </div>
@@ -113,10 +113,10 @@
 
         <div class="Row">
             <div class="Row" id="MinMaxDay"> 
-                <img src="../../assets/Img/SunnyIcon.svg" width="30%">
+                <img [src]="cityService.cityWeatherIcon(cityService.forecastDays[2]['date'].getDate())" width="30%">
                 <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="Title" style="font-size: 12px; color: black;"> {{cityService.days[cityService.forecastDays[2]["date"].getDay() - 1]}} </div>
-                    <div class="Subtitle" style="font-size: 12px;">Sunny</div>
+                    <div class="Title" style="font-size: 12px; color: black;"> {{cityService.days[cityService.forecastDays[2]["date"].getDay()]}} </div>
+                    <div class="Subtitle" style="font-size: 12px;">{{cityService.cityWeatherStatus(cityService.forecastDays[1]['date'].getDate())}}</div>
                 </div>
             </div>
             <div class="Row" id="MinMaxRow"> 
@@ -138,10 +138,10 @@
                 <span>{{cityService.forecastDays[3]["minTemp"]}}º</span>
             </div>
             <div class="Row" id="MinMaxDay"> 
-                <img src="../../assets/Img/HeavyRainIcon.svg" width="30%">
+                <img [src]="cityService.cityWeatherIcon(cityService.forecastDays[3]['date'].getDate())" width="30%">
                 <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="Title" style="font-size: 12px; color: black;"> {{cityService.days[cityService.forecastDays[3]["date"].getDay() - 1]}} </div>
-                    <div class="Subtitle" style="font-size: 12px;">Heavy Rain</div>
+                    <div class="Title" style="font-size: 12px; color: black;"> {{cityService.days[cityService.forecastDays[3]["date"].getDay()]}} </div>
+                    <div class="Subtitle" style="font-size: 12px;">{{cityService.cityWeatherStatus(cityService.forecastDays[1]['date'].getDate())}}</div>
                 </div>
             </div>
         </div>

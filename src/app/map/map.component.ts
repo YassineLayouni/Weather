@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CityService } from '../city.service';
 import { UserService } from '../user.service';
-import { MapComponent as Map1 } from '@maplibre/ngx-maplibre-gl';
 import maplibregl,{Map,NavigationControl ,Marker, GeolocateControl, FullscreenControl, MapMouseEvent, Popup} from 'maplibre-gl';
 import { City } from '../Classes/City';
+import { GlobalService } from '../global.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -13,12 +14,34 @@ import { City } from '../Classes/City';
 export class MapComponent implements OnInit {
 
   loading : Boolean = false;
-  selectedCity! : City;
-  constructor(public userService:UserService, public cityService : CityService) { 
+  selectedCity : City | undefined;
+  constructor(public userService:UserService, public cityService : CityService, public globalService: GlobalService, public router:Router) { 
     this.userService.showMenu = true;
     this.cityService.searchedCity.subscribe(() => {
       this.addSearchedCity();
   });
+  }
+
+
+  selectCity(city:City){
+    this.loading = true;
+    this.selectedCity = new City({});
+    this.selectedCity!.lat = city.lat;
+    this.selectedCity!.lon = city.lon; 
+    this.cityService._getCityWeather(city.lat!, city.lon!).subscribe((data : any)=>{
+      this.loading = false;
+      this.selectedCity = new City({
+        name : data.City,
+        lat : data.Corrd.lat,
+        lon : data.Corrd.lon,
+        country : data.Country,
+        humidity : data.Humidity,
+        temp : data.Temp,
+        windDirection : data.Wind_Dir,
+        windSpeed : data.Wind_Speed,
+        pressure : data.Pressure
+      })
+    });
   }
 
 
@@ -27,7 +50,7 @@ export class MapComponent implements OnInit {
   @ViewChild(`map`) mapContainer!: ElementRef<HTMLElement>;
   @ViewChild(`cityDetails`) cityDetails!: ElementRef<HTMLElement>;
   map!: Map;
-  initialState = { lng: 139.753, lat: 35.6844, zoom: 14 };
+  initialState = { lng: 139.753, lat: 35.6844, zoom: 0 };
   
 
 
@@ -44,29 +67,16 @@ export class MapComponent implements OnInit {
     this.map.addControl(new FullscreenControl({}), 'top-right');
     this.map.addControl(new NavigationControl({}), 'top-right');
     this.map.addControl(new GeolocateControl({}), 'top-right');
+
+    this.addFollowedCities();
   }
 
   public async addSearchedCity(){
     let city = this.cityService.searchedCity.getValue();
     let popup!: Popup;
     let marker! : Marker;
-
-    this.loading = true;
     if(city != undefined){
-      this.cityService._getCityWeather(city?.lat!,city?.lon!).subscribe((data : any)=>{
-        this.loading = false;
-        this.selectedCity = new City({
-          name : city?.name,
-          lat : data.Corrd.lat,
-          lon : data.Corrd.lon,
-          country : city?.country,
-          humidity : data.Humidity,
-          temp : data.Temp,
-          windDirection : data.Wind_Dir,
-          windSpeed : data.Wind_Speed,
-          pressure : data.Pressure
-        })
-      })
+
 
       popup = new Popup({closeButton : false, closeOnClick : true})
       .setDOMContent(this.cityDetails.nativeElement)
@@ -76,6 +86,25 @@ export class MapComponent implements OnInit {
       .setLngLat([city?.lon!,city?.lat!])
       .setPopup(popup)
       .addTo(this.map)
+
+
+      marker.getElement().addEventListener('click', () => {
+        this.loading = true;
+        this.cityService._getCityWeather(city?.lat!, city?.lon!).subscribe((data : any)=>{
+          this.loading = false;
+          this.selectedCity = new City({
+            name : data.City,
+            lat : data.Corrd.lat,
+            lon : data.Corrd.lon,
+            country : data.Country,
+            humidity : data.Humidity,
+            temp : data.Temp,
+            windDirection : data.Wind_Dir,
+            windSpeed : data.Wind_Speed,
+            pressure : data.Pressure
+          })
+        })
+      });
   
       this.map.flyTo({
         center: [
@@ -88,58 +117,81 @@ export class MapComponent implements OnInit {
     }
   }
 
+  addFollowedCities(){
+    for(let city of this.userService.user?.villes!){
+      let popup!: Popup;
+      let marker! : Marker;
+      if(city != undefined){
+  
+  
+        popup = new Popup({closeButton : false, closeOnClick : true})
+        .setDOMContent(this.cityDetails.nativeElement)
+
+        marker = new Marker({color: "rgb(67,80,175)"})
+        .setLngLat([city?.lon!,city?.lat!])
+        .setPopup(popup)
+        .addTo(this.map)
+
+        marker.getElement().addEventListener('click', () => {
+          this.loading = true;
+          this.cityService._getCityWeather(city?.lat!, city?.lon!).subscribe((data : any)=>{
+            this.loading = false;
+            this.selectedCity = new City({
+              name : data.City,
+              lat : data.Corrd.lat,
+              lon : data.Corrd.lon,
+              country : data.Country,
+              humidity : data.Humidity,
+              temp : data.Temp,
+              windDirection : data.Wind_Dir,
+              windSpeed : data.Wind_Speed,
+              pressure : data.Pressure
+            })
+          })
+        });
+    }
+  }
+  }
+  addCity(){
+    if(this.userService.user){
+      if(this.selectedCity){
+        if(!this.cityService.cityExist(this.userService.user, this.selectedCity)){
+          this.cityService._addCity(this.userService.user, this.selectedCity).subscribe((data : any)=>{
+            this.userService._refreshUser();
+            this.cityService.followedCities = [];
+            this.globalService.openSuccessSnackBar("You are now following this city");
+          }, (error : any)=>{
+            this.globalService.openErrorSnackBar("An error occured while following city, try again later");
+          })
+        }else{
+          this.globalService.openErrorSnackBar("You are already following this city");
+        }
+      }
+    }else{
+      this.globalService.openErrorSnackBar("Login to your account to follow cities");
+      this.router.navigate(['Login']);
+    }
+  }
+
   ngAfterViewInit() : void{
     this.initMap();
   }
 
   ngOnInit(): void {
-    maplibregl.setRTLTextPlugin(
+    /*maplibregl.setRTLTextPlugin(
       'https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js',
       ()=>{},
       true// Lazy load the plugin
-      );
-  }
-
-
-
-
-
-
-  popupString(city : City){
-
-  return `<div class="cityName">${city.name}</div> ` +
-  '<div class="cityDetails">' +
-      '<div class="cityDetail">' +
-          `<span class="detail">Country</span>`+
-          `<span class="detailValue">${city.country}</span>`+
-      '</div>'+
-      '<div class="cityDetail">'+
-          '<span class="detail">Temp</span>'+
-          `<span class="detailValue">${city.temp}˚C</span>`+
-      '</div>'+
-      '<div class="cityDetail">'+
-          '<span class="detail">Clouds</span>'+
-          `<span class="detailValue">${city.clouds}%</span>`+
-      '</div>'+
-      '<div class="cityDetail">'+
-          '<span class="detail">Humidity</span>'+
-          `<span class="detailValue">${city.humidity}%</span>`+
-      '</div>'+
-      '<div class="cityDetail">'+
-          '<span class="detail">Pressure</span>'+
-          `<span class="detailValue">${city.pressure}hPa</span>`+
-      '</div>'+
-      '<div class="cityDetail">'+
-          '<span class="detail">Wind Direction</span>'+
-          `<span class="detailValue">${city.windDirection}˚</span>`+
-      '</div>'+
-      '<div class="cityDetail">'+
-          '<span class="detail">Wind Speed</span>'+
-          `<span class="detailValue">${city.windSpeed}m/s</span>`+
-      '</div>'+
-      '<button mat-raised-button color="accent" id="AddCity">Add City</button>'+
-  '</div>'
-
+      );*/
+      if(this.userService.isUserLogged && this.cityService.searchedCities.length == 0){
+        console.log(this.userService.user);
+        if(this.userService.user!.villes!.length != 0){
+          console.log("hII");
+          this.selectCity(this.userService.user!.villes![0]);
+        }
+      }else if(this.cityService.searchedCities.length > 0){
+        this.selectCity(this.cityService.searchedCities[0]);
+      }
   }
 
 }

@@ -59,7 +59,6 @@
     width: 65%;
     height: 115%;
     position: relative;
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url("../../assets/Img/Spain.jpg");
     border-radius: 15px;
     background-size: cover;
     background-position: center;

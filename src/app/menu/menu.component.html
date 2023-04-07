@@ -19,7 +19,7 @@
             <span class="material-symbols-outlined icon">settings</span>
             Settings
         </div>
-        <div [routerLink]="['/Cities']" routerLinkActive="active" matRipple id="Cities" style="margin-top: 20%;">
+        <div *ngIf="this.userService.isUserLogged" [routerLink]="['/Cities']" routerLinkActive="active" matRipple id="Cities" style="margin-top: 20%;">
             <span class="material-symbols-outlined icon">pin_drop</span>
             Cities
         </div>

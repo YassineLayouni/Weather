@@ -9,6 +9,7 @@ export class City{
     pressure : number | undefined; 
     windDirection :number | undefined;
     windSpeed : number | undefined; 
+    image : String | undefined;
 
     
     constructor({name, 
@@ -20,7 +21,7 @@ export class City{
         humidity,
         pressure,
         windDirection,
-        windSpeed}:{
+        windSpeed, image}:{
         
         name? : string, 
         country? : string,
@@ -31,7 +32,8 @@ export class City{
         humidity? : number,
         pressure? : number,
         windDirection? :number,
-        windSpeed? : number}){
+        windSpeed? : number,
+        image? : String}){
 
             this.name = name;
             this.country = country;
@@ -43,5 +45,6 @@ export class City{
             this.pressure = pressure;
             this.windDirection = windDirection;
             this.windSpeed = windSpeed;
+            this.image = image;
         };
 }

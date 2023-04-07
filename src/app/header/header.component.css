@@ -84,3 +84,18 @@ input:focus{
     padding: 30px;
     color: rgb(137, 137, 137);
 }
+
+#NotificationsOn{
+    color: rgb(137, 137, 137);
+}
+
+.notification{
+    padding: 0.5vw;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgb(215, 215, 215);
+}
+
+.notification:hover{
+    background-color: rgb(241, 247, 255);
+}

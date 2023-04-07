@@ -38,7 +38,8 @@ export class HeaderComponent implements OnInit {
   };
 
   citySelected(city : City){
-    this.cityService.searchedCity.next(city);
+    //this.cityService.searchedCity.next(city);
+    this.cityService.searchedCities.push(city);
     this.router.navigate(['Map']);
   }
   ngOnInit(): void {
